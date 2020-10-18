@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationServices", "SimulationServices\SimulationServices.csproj", "{C31918E2-D3C2-483E-8560-E35DDB0CE51E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{32B9DFE6-D309-412A-BAD7-0EE3CEC1BD51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C31918E2-D3C2-483E-8560-E35DDB0CE51E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C31918E2-D3C2-483E-8560-E35DDB0CE51E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C31918E2-D3C2-483E-8560-E35DDB0CE51E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C31918E2-D3C2-483E-8560-E35DDB0CE51E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32B9DFE6-D309-412A-BAD7-0EE3CEC1BD51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32B9DFE6-D309-412A-BAD7-0EE3CEC1BD51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32B9DFE6-D309-412A-BAD7-0EE3CEC1BD51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32B9DFE6-D309-412A-BAD7-0EE3CEC1BD51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24BF7324-ADC2-4302-996A-9385F4426D54}
+	EndGlobalSection
+EndGlobal

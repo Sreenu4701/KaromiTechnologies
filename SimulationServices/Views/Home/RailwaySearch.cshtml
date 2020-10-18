@@ -1,0 +1,240 @@
+﻿@model IEnumerable<SimulationServices.Models.SearchModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<title>Railway Ticket Booking</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Raleway", Arial, Helvetica, sans-serif
+    }
+
+    .myLink {
+        display: none
+    }
+</style>
+<body class="w3-light-grey">
+
+    <!-- Navigation Bar -->
+    <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+        <a href="#" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-subway w3-margin-right"></i>Railway Ticket Booking</b></a>
+
+    </div>
+
+    <!-- Header -->
+    <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+        @*<img class="w3-image" src="images\backgroundimg.jpg" alt="London" width="1500" height="500">*@
+        <div class="w3-display-middle" style="width:65%">
+            <div id="RailwayBooking" class="w3-container" style="background-color: #FFFFFF; margin-top:500px">
+                <div class="" style="color: red; height:30px">
+                    <h3><marquee behavior="scroll" direction="left"><strong>Travel the world with us</strong> </marquee></h3>
+                </div>
+
+                <div class="w3-row-padding" style="margin:0 -16px;">
+                    <div class="w3-half">
+                        <label>From</label>
+                        <input class="w3-input w3-border" type="text" id="Src" placeholder="Source Station">
+                    </div>
+                    <div class="w3-half">
+                        <label>To</label>
+                        <input class="w3-input w3-border" type="text" id="Dest" placeholder="Destination Station">
+                    </div>
+                </div>
+                <div>
+                    <div style="padding-top: 10px">
+                        <input class="w3-input w3-border" type="date" id="Doj" />
+                    </div>
+                </div>
+                <p><button class="w3-button w3-dark-grey" id="Searchbtn" onclick="GetList()">Find Trains</button></p>
+            </div>
+            <p></p>
+            <div id="TrainsList">
+                <table id="dataTable" width="880px" border="1">
+                </table>
+
+            </div>
+        </div>
+
+
+
+    </header>
+
+    <!-- Page content -->
+    <div id="BookingDetails" class="w3-content" style="max-width:1100px; margin-top:450px">
+
+        <!-- Contact -->
+        <div class="w3-container">
+            <h2>Passenger Details</h2>
+            <p>Let us book your next trip!</p>
+
+            <form>
+                <p><input class="w3-input w3-padding-16 w3-border" id="Name" type="text" placeholder="Name" required name="Name"></p>
+                <p><input class="w3-input w3-padding-16 w3-border" id="Number" type="number" placeholder="Train Number" required name="Number"></p>
+                <p><input class="w3-input w3-padding-16 w3-border" id="Email" type="text" placeholder="Email" required name="Email"></p>
+                <p><input class="w3-input w3-padding-16 w3-border" id="Seats" type="number" placeholder="Number of Seats" required name="Seats" /></p>
+                <p>
+                    <select id="seatType" class="w3-input w3-padding-16 w3-border">
+                        <option value="" disabled selected>Select Type of Seat</option>
+                        <option>SL</option>
+                        <option>Gen</option>
+                    </select>
+                </p>
+                <p><button id="fareButton" class="w3-button w3-black w3-padding-large" type="button" onclick="enableButton()">TOTAL FARE</button></p>
+
+                <!-- load fare here -->
+                <p id="fare"><strong> </strong> </p>
+                <p><button id="SEND" class="w3-button w3-black w3-padding-large" type="submit" disabled>SEND MAIL</button></p>
+            </form>
+        </div>
+
+        <!-- End page content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-center w3-opacity w3-margin-bottom">
+        <h5>Find Us On</h5>
+        <div class="w3-xlarge w3-padding-16">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+
+    </footer>
+
+    <script>
+
+        function enableButton() {
+            document.getElementById("SEND").disabled = false;
+            if (document.getElementById("Seats").value == 'SL') {
+                document.getElementById("fare").innerHTML = "Total Fare: " + 135 * document.getElementById("Seats").value + " ₹";
+            }
+            else {
+                document.getElementById("fare").innerHTML = "Total Fare: " + 100 * document.getElementById("Seats").value + " ₹";
+            }
+            
+        }
+
+
+        function addRow(dataTable) {
+
+            var table = document.getElementById(tableID);
+
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var colCount = table.rows[0].cells.length;
+
+            for (var i = 0; i < colCount; i++) {
+
+                var newcell = row.insertCell(i);
+
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+                //alert(newcell.childNodes);
+                switch (newcell.childNodes[0].type) {
+                    case "text":
+                        newcell.childNodes[0].value = "";
+                        break;
+                    case "checkbox":
+                        newcell.childNodes[0].checked = false;
+                        break;
+                    case "select-one":
+                        newcell.childNodes[0].selectedIndex = 0;
+                        break;
+                }
+            }
+        }
+    </script>
+
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Searchbtn').click(function () {
+                $.getJSON('/Home/GetListOfTrains/?src=' + $('#Src').val() + '&dest=' + $('#Dest').val() + '&doj=' + $('#Doj').val(), function (data) {
+                    var items = '<table><tr>< td > <b>Train Number</b></td><td><b>Train Name</b></td><td><b>Source</b></td><td><b>Destination</b></td><td><b>Source Time</b></td><td><b>Destination Time</b></td><td></td></tr >';
+                    $.each(data, function (i, e) {
+                        items += "<tr><td>" + e.TrainNumber + "</td><td>" + e.TrainName + "</td> <td>" + e.Source + "</td> <td>" + e.Destination + "</td> <td>" + e.Sources[0].SourceTime + "</td> <td>" + e.Destinations[e.Destinations.Count - 1].SourceTime + "</td><td>" + "<button onclick=" + SelectTrain(this.TrainNumber)+ ">Select</button>" + "</td></tr>";
+                    });
+                    items += "</table>";
+                    $('#dataTable').html(items);
+                });
+            });
+
+            function SelectTrain(trainNumber) {
+                $('#Number').val(trainNumber);
+            }
+            
+            $('#SEND').click(function () {
+                var a;
+                if ($('#seatType').val() == 'SL') a = 1;
+                else a = 2;
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/BookingList',
+                    dataType: "json",
+                    data: {
+                        "TrainNumber": $('#Number').val(),
+                        "ModeOfJourney": a,
+                        "NoOfSeats": $('#Seats').val(),
+                        "TotalFare": $('#fare').val(),
+                        "Email": $('#Email').val(),
+                        "Name": $('#Name').val(),
+                        "Source": $('#Src').val(),
+                        "Destination": $('#Dest').val(),
+                        "DOJ": $('#Doj').val()
+                    },
+                    cache: false,
+                    success: function (data, textStatus) {
+                        data = eval("(" + data + ")");
+                        if (data == true) {
+                            return true;
+                        }
+                        else {
+                            alert("");
+                            return false;
+                        }
+                    }, //success
+                    error: function (req) {
+
+                    }
+                });  
+            });
+
+            
+        });
+
+
+        //function GetList() {
+            
+        //    var x = document.getElementById("Src").value;
+        //    var y = document.getElementById("Dest").value;
+        //    var z = document.getElementById("Doj").value;
+
+        //    var url = '/Home/GetListOfTrains/?src=' + x + '&dest=' + y + '&doj=' + z;
+
+ 
+
+        //    //var Httpreq = new XMLHttpRequest(); // a new request
+        //    //Httpreq.open("GET", url, false);
+        //    //Httpreq.send(null);
+        //    //var a = JSON.parse(Httpreq.responseText);
+        //}
+
+        //var json_obj = JSON.parse(Get(yourUrl));
+    </script>
+
+</body>
+</html>
